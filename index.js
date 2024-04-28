@@ -49,6 +49,28 @@ async function run() {
       res.send(result);
     });
 
+    app.put("/crafts/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCraft = req.body;
+      const craft = {
+        $set: {
+          craft: updateCraft.craft,
+          subcategory: updateCraft.subcategory,
+          stock: updateCraft.stock,
+          description: updateCraft.description,
+          process: updateCraft.process,
+          price: updateCraft.price,
+          rating: updateCraft.rating,
+          photo: updateCraft.photo,
+          customization: updateCraft.customization,
+        },
+      };
+      const result = await craftCollection.updateOne(query, craft, options);
+      res.send(result);
+    });
+
     app.post("/crafts", async (req, res) => {
       const newCraft = req.body;
       const result = await craftCollection.insertOne(newCraft);
