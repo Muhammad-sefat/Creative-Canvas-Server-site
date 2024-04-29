@@ -26,10 +26,17 @@ async function run() {
     await client.connect();
 
     const craftCollection = client.db("craftDB").collection("craft");
+    const subCraftCollection = client.db("craftDB").collection("subcraft");
 
     app.get("/crafts", async (req, res) => {
       const cursor = craftCollection.find();
       const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/subcraft", async (req, res) => {
+      const cursor = subCraftCollection.find();
+      const result = await cursor.toArray();
+      console.log(cursor);
       res.send(result);
     });
     app.get("/myCrafts/:email", async (req, res) => {
