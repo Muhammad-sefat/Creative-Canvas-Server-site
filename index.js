@@ -23,7 +23,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const craftCollection = client.db("craftDB").collection("craft");
     const subCraftCollection = client.db("craftDB").collection("subcraft");
@@ -33,12 +33,7 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
-    app.get("/subcraft", async (req, res) => {
-      const cursor = subCraftCollection.find();
-      const result = await cursor.toArray();
-      console.log(cursor);
-      res.send(result);
-    });
+
     app.get("/myCrafts/:email", async (req, res) => {
       const emails = req.params.email;
       const cursor = craftCollection.find({ email: emails });
@@ -85,6 +80,22 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await craftCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // subCraftCollection
+
+    app.get("/subcraft", async (req, res) => {
+      const cursor = subCraftCollection.find();
+      const result = await cursor.toArray();
+      console.log(cursor);
+      res.send(result);
+    });
+
+    app.get("/subcraft/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await subCraftCollection.findOne(query);
       res.send(result);
     });
     // Send a ping to confirm a successful connection
