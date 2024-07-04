@@ -10,7 +10,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://b9a10-server-side-muhammad-sefat.vercel.app/",
+      "https://creative-canvas-24236.firebaseapp.com",
     ],
     credentials: true,
   })
