@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
+      "https://creative-canvas-24236.web.app",
       "https://creative-canvas-24236.firebaseapp.com",
     ],
     credentials: true,
