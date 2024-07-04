@@ -8,7 +8,10 @@ const port = process.env.PORT || 5000;
 // middlewere
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [
+      "http://localhost:5173",
+      "https://b9a10-server-side-muhammad-sefat.vercel.app/",
+    ],
     credentials: true,
   })
 );
