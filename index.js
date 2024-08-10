@@ -1,8 +1,8 @@
 const express = require("express");
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
-const cors = require("cors");
-require("dotenv").config();
 const app = express();
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+require("dotenv").config();
+const cors = require("cors");
 const port = process.env.PORT || 5000;
 
 // middlewere
@@ -106,14 +106,11 @@ async function run() {
       const result = await subCraftCollection.findOne(query);
       res.send(result);
     });
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
   } finally {
-    // Ensures that the client will close when you finish/error
-    // await client.close();
   }
 }
 run().catch(console.dir);
